@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
 
+    const [error, setError] = useState('');
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -23,9 +24,13 @@ const Register = () => {
             const user = result.user;
             console.log(user);
             form.reset();
+            setError('')
             navigate('/')
         })
-        .catch( e => console.error(e));
+        .catch(error => {
+            console.log(error)
+            setError(error.message)
+        });
     }
 
     return (
@@ -52,12 +57,15 @@ const Register = () => {
                 <Form.Control name="password" type="password" placeholder="Password" required />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Form.Text className="text-danger">
+                <div>
+                    {error}
+                </div>
+            </Form.Text>
+
+            <Button variant="primary" type="submit" className='mt-3'>
                 Register
             </Button>
-            <Form.Text className="text-danger">
-
-            </Form.Text>
         </Form>
     );
 };
