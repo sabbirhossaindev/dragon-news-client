@@ -9,7 +9,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    const { signIn } = useContext(AuthContext);
+    const { signIn, setLoading } = useContext(AuthContext);
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
@@ -22,23 +22,26 @@ const Login = () => {
         console.log(email, password)
 
         signIn(email, password)
-        .then( result => {
-            const user = result.user;
-            console.log(user);
-            setError('');
-            form.reset();
-            if(user.emailVerified){
-                navigate(from, {replace: true});
-            }
-            else{
-                toast.error('Your email is not verified. Please verify your email address.')
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            setError(error.message);
-        });
-    }
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setError('');
+                form.reset();
+                if (user.emailVerified) {
+                    navigate(from, { replace: true });
+                }
+                else {
+                    toast.error('Your email is not verified. Please verify your email address.')
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.message);
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    };
 
 
     return (
