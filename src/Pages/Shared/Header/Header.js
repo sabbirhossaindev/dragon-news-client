@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 import Button from 'react-bootstrap/Button';
-import { FcBusinessman } from 'react-icons/fc';
+import { HiUserCircle } from "react-icons/hi";
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -49,30 +49,30 @@ const Header = () => {
                                 user?.uid ?
                                     <>
                                         <span className='me-2 mt-2'>{user?.displayName}</span> 
-                                        <Button variant="dark" onClick={handleLogOut}>Log out</Button>
+                                        <Button className='me-2' variant="dark" onClick={handleLogOut}>Log out</Button>
                                     </> 
                                         :
                                     <>
-                                        <Link to='/login' className='m-3 text-dark'>Login</Link>
+                                        <Link to='/login' className='me-2 text-dark'>Login</Link>
                                         <Link to='/register' className='text-dark'>Register</Link>
                                     </>    
                             }
                                 
                         </>
-                        <Nav.Link eventKey={2} href="#memes">
+                        <Link to='/profile'>
                                 
-                        {
-                            user?.photoURL ?
-                            <Image
-                                style={{ height: '30px' }}
-                                roundedCircle
-                                src={user?.photoURL}>
-                            </Image>          
-                            :      
-                            <FcBusinessman></FcBusinessman>
-                       }  
+                            {
+                                user?.photoURL ?
+                                <Image
+                                    style={{ height: '30px' }}
+                                    roundedCircle
+                                    src={user?.photoURL}>
+                                </Image>          
+                                :      
+                                <HiUserCircle></HiUserCircle>
+                        }  
                        
-                        </Nav.Link>
+                        </Link>
                     </Nav>
                     <div className='d-lg-none'>
                         <LeftSideNav></LeftSideNav>   
