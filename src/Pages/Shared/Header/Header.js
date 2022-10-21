@@ -43,22 +43,22 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">
+                        <>
                                 
                             {
                                 user?.uid ?
                                     <>
-                                        <span className='me-2'>{user?.displayName}</span> 
+                                        <span className='me-2 mt-2'>{user?.displayName}</span> 
                                         <Button variant="dark" onClick={handleLogOut}>Log out</Button>
                                     </> 
                                         :
                                     <>
-                                        <Link to='/login'>Login</Link>
-                                        <Link to='/register'>Register</Link>
+                                        <Link to='/login' className='m-3 text-dark'>Login</Link>
+                                        <Link to='/register' className='text-dark'>Register</Link>
                                     </>    
                             }
                                 
-                        </Nav.Link>
+                        </>
                         <Nav.Link eventKey={2} href="#memes">
                                 
                         {
