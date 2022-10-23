@@ -22,12 +22,12 @@ export const routers = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <Category></Category>,
-                loader: ({params}) => fetch(`https://dragon-news-server-ochre-kappa.vercel.app/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://dragon-news-server-ochre-kappa.vercel.app/category/${params.id}`)
             },
             {
                 path: '/news/:id',
                 element: <PrivateRouter><News></News></PrivateRouter>,
-                loader: ({params}) => fetch(`https://dragon-news-server-ochre-kappa.vercel.app/news/${params.id}`)
+                loader: ({ params }) => fetch(`https://dragon-news-server-ochre-kappa.vercel.app/news/${params.id}`)
             },
             {
                 path: '/login',
@@ -47,4 +47,4 @@ export const routers = createBrowserRouter([
             }
         ]
     }
-])
+]);
